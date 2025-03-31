@@ -1,17 +1,19 @@
-import { SCHEMES } from "./uri";
-import http from "./schemes/http";
-SCHEMES[http.scheme] = http;
-import https from "./schemes/https";
-SCHEMES[https.scheme] = https;
-import ws from "./schemes/ws";
-SCHEMES[ws.scheme] = ws;
-import wss from "./schemes/wss";
-SCHEMES[wss.scheme] = wss;
-import mailto from "./schemes/mailto";
-SCHEMES[mailto.scheme] = mailto;
-import urn from "./schemes/urn";
-SCHEMES[urn.scheme] = urn;
-import uuid from "./schemes/urn-uuid";
-SCHEMES[uuid.scheme] = uuid;
-export * from "./uri";
-//# sourceMappingURL=index.js.map
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+if (process.env.NODE_ENV !== 'production') {
+  var ReactIs = require('react-is');
+
+  // By explicitly using `prop-types` you are opting into new development behavior.
+  // http://fb.me/prop-types-in-prod
+  var throwOnDirectAccess = true;
+  module.exports = require('./factoryWithTypeCheckers')(ReactIs.isElement, throwOnDirectAccess);
+} else {
+  // By explicitly using `prop-types` you are opting into new production behavior.
+  // http://fb.me/prop-types-in-prod
+  module.exports = require('./factoryWithThrowingShims')();
+}
